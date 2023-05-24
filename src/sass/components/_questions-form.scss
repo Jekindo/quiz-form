@@ -1,0 +1,103 @@
+.questions-form {
+  @media screen and (min-width: 1200px) {
+    & {
+      max-width: 50%;
+    }
+  }
+}
+
+.card {
+  opacity: 0;
+
+  //   border-left: var(--bs-card-border-width) solid var(--bs-card-border-color);
+
+  transition: opacity 250ms ease-in-out, border-left 250ms ease-in-out;
+
+  &.is-active {
+    border-left: var(--bs-card-border-width) solid getColor('accent');
+  }
+
+  &.is-show {
+    opacity: 1;
+  }
+}
+
+.form-label {
+  max-width: 100%;
+  width: 100%;
+}
+
+.form-control {
+  &.is-correct {
+    color: green;
+    box-shadow: rgba(26, 109, 18, 0.3) 0px 1px 2px 0px,
+      rgba(21, 119, 29, 0.15) 0px 1px 3px 1px;
+    // box-shadow: 0 0 0 0.25rem #16810840;
+  }
+}
+
+.input-group {
+  opacity: 1;
+
+  transition: opacity 250ms ease-in-out;
+
+  &.is-deleted {
+    opacity: 0;
+  }
+}
+
+.add-btn {
+  padding: 1.1rem 0;
+
+  border: 1px solid getColor('border');
+
+  background-color: getColor('primary-white');
+
+  & > span {
+    display: inline-block;
+
+    border-bottom: 0.3rem solid getColor('accent');
+
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    transition: color 250ms ease-in-out;
+  }
+
+  &:hover > span {
+    color: getColor('accent');
+  }
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background-color: transparent;
+
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    background-color: getColor('accent');
+    color: getColor('primary-white');
+  }
+
+  &.is-active {
+    background-color: getColor('accent');
+    color: getColor('primary-white');
+  }
+}
+
+.action-button__icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}

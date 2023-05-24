@@ -1,0 +1,36 @@
+.alert {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 1.2rem;
+
+  margin: 0;
+  padding: 10px 15px;
+
+  border: 1px solid #2a2a2a;
+  border-radius: 3px;
+
+  background-color: getColor('primary-white');
+  color: #2a2a2a;
+  cursor: pointer;
+  user-select: none;
+
+  transform: translateX(calc(-100% - 20px));
+  visibility: hidden;
+  opacity: 0;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.info {
+    border: 1px solid getColor('accent');
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background-color: getColor('accent');
+    color: getColor('primary-white');
+  }
+
+  &.is-visible {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}

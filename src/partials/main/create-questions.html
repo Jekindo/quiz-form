@@ -1,0 +1,215 @@
+<section class="pt-3 pb-3">
+  <div class="container">
+    <form name="quizForm" class="questions-form m-auto">
+      <div class="card is-show rounded-top form-wrapper p-4 mb-3" id="heading">
+        <h2>Нове опитування</h2>
+        <label class="form-label" for="descr">
+          Введіть опис опитування (функціонально)
+        </label>
+        <input class="form-control" type="text" name="description" id="descr" />
+      </div>
+
+      <div
+        class="card js-question-card is-show is-active rounded-top p-4 mb-3"
+        id="q1"
+      >
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Запитання
+              <input
+                class="form-control mt-2"
+                type="text"
+                name="question"
+                placeholder="Хто президент України ?"
+              />
+            </label>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Тип відповіді
+              <select class="form-select js-form-select mt-2" name="answerType">
+                <option value="radio">Один зі списку</option>
+                <option value="checkbox">Декілька зі списку</option>
+                <option value="text">текст (рядок)</option>
+                <option value="textarea" selected>текст (абзац)</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-3" id="answers-container">
+          <label class="form-label">
+            Розгорнута відповідь
+            <textarea
+              class="form-control mt-2"
+              name="answer"
+              rows="5"
+              placeholder="Введіть відповідь тут..."
+            ></textarea>
+          </label>
+        </div>
+
+        <hr />
+
+        <!-- Видалити запитання -->
+        <button
+          class="action-button ms-auto"
+          type="button"
+          aria-label="delete question"
+          data-action="delete-question"
+          question-id="q1"
+        >
+          <svg
+            class="action-button__icon"
+            question-id="q1"
+            data-action="delete-question"
+          >
+            <use
+              href="./images/icons/sprite.svg#trash-fill"
+              question-id="q1"
+              data-action="delete-question"
+            ></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="card js-question-card is-show rounded-top p-4 mb-3" id="q2">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Запитання
+              <input
+                class="form-control mt-2"
+                type="text"
+                name="question"
+                placeholder="Хто президент України ?"
+              />
+            </label>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">
+              Тип відповіді
+              <select class="form-select js-form-select mt-2" name="answerType">
+                <option value="radio" selected>Один зі списку</option>
+                <option value="checkbox">Декілька зі списку</option>
+                <option value="text">текст (рядок)</option>
+                <option value="textarea">текст (абзац)</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-3" id="answers-container">
+          <div class="input-group w-100 mb-3 align-items-center">
+            <svg class="" width="22" height="22">
+              <use href="./images/icons/sprite.svg#circle"></use>
+            </svg>
+
+            <input
+              type="text"
+              class="form-control ms-2"
+              name="answer"
+              value="Варіант 1"
+            />
+
+            <button
+              class="action-button"
+              type="button"
+              aria-label="select correct answer"
+              data-action="select-correct-answer"
+            >
+              <svg
+                class="action-button__icon"
+                data-action="select-correct-answer"
+              >
+                <use
+                  href="./images/icons/sprite.svg#check"
+                  data-action="select-correct-answer"
+                ></use>
+              </svg>
+            </button>
+            <button
+              class="action-button"
+              type="button"
+              aria-label="remove answer"
+              data-action="remove-answer"
+            >
+              <svg class="action-button__icon" data-action="remove-answer">
+                <use
+                  href="./images/icons/sprite.svg#x-lg"
+                  data-action="remove-answer"
+                ></use>
+              </svg>
+            </button>
+          </div>
+
+          <div class="input-group w-100 mb-3 align-items-center">
+            <svg class="" width="22" height="22">
+              <use href="./images/icons/sprite.svg#circle"></use>
+            </svg>
+
+            <input
+              type="text"
+              class="js-disabled-form-control form-control ms-2 disabled text-secondary"
+              name="answerStub"
+              value="Додати варіант"
+            />
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Видалити запитання -->
+        <button
+          class="action-button ms-auto"
+          type="button"
+          aria-label="delete question"
+          data-action="delete-question"
+          question-id="q2"
+        >
+          <svg
+            class="action-button__icon"
+            question-id="q2"
+            data-action="delete-question"
+          >
+            <use
+              href="./images/icons/sprite.svg#trash-fill"
+              question-id="q2"
+              data-action="delete-question"
+            ></use>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Кнопка Додати запитання -->
+      <button
+        class="add-btn w-100 rounded mb-3"
+        type="button"
+        data-action="add-question"
+      >
+        <span>+ Додати запитання</span>
+      </button>
+
+      <!-- Підтвердити створення опитування -->
+      <button class="btn btn-primary w-100 pt-3 pb-3" type="submit">
+        Створити опитування
+      </button>
+    </form>
+
+    <!-- NOTIFICATION -->
+    <p class="alert js-alert info">
+      <span class="label">Питання видалено</span>
+      <button
+        class="text-uppercase btn btn-warning ms-2"
+        type="button"
+        data-action="cancel-remove-question"
+        deleted-question-id=""
+      >
+        відмінити
+      </button>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.nav-item {
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.65);
+
+  &:hover {
+    color: getColor('primary-white');
+  }
+
+  &.current {
+    color: getColor('primary-white');
+  }
+}

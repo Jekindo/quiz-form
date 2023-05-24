@@ -1,0 +1,33 @@
+{
+  "name": "quiz-form",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://Jekindo.github.io/quiz-form",
+  "scripts": {
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /quiz-form/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jekindo/quiz-form.git"
+  },
+  "keywords": [],
+  "author": "Boyko Evgeniy <jekaboyko0605@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jekindo/quiz-form/issues"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.7",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.5",
+    "modern-normalize": "^1.1.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.0",
+    "parcel": "^2.6.0",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "posthtml-include": "^1.7.4"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
+}

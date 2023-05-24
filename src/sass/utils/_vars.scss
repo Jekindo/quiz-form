@@ -1,0 +1,10 @@
+$colors: (
+  'primary-white': #fff,
+  'logo-dark': #212121,
+  'border': #0000002d,
+  'accent': #0d6efd,
+);
+
+@function getColor($key) {
+  @return map-get($colors, $key);
+}

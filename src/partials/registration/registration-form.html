@@ -1,0 +1,97 @@
+<section>
+	<div class="container">
+	  <div class="row mt-5">
+		<div class="col-lg-4 bg-white m-auto pb-3 rounded-top form-wrapper">
+		  <h2 class="text-center pt-3">Зареєструйтесь зараз</h2>
+		  <p class="text-center text-muted lead">Це займе 1 хвилину</p>
+		  
+		  <form name="registrationForm">
+			<div class="mb-3">
+			  <label for="input-name" class="form-label">Ім’я</label>
+			  <input
+				class="form-control"
+				type="text"
+				id="input-name"
+				name="name"
+				placeholder="Вася Пупкін"
+				required
+			  />
+			</div>
+			<div class="mb-3">
+			  <label for="input-email" class="form-label">Email</label>
+			  <input
+				class="form-control"
+				type="email"
+				name="mail"
+				id="input-email"
+				placeholder="example@mail.com"
+				required
+			  />
+			</div>
+			<div class="mb-3">
+			  <label for="input-password" class="form-label">Пароль</label>
+			  <input
+				class="form-control"
+				type="password"
+				name="password"
+				id="input-password"
+				required
+			  />
+			  <p class="form-text">Повинен містити від 8 до 20 символів</p>
+			</div>
+			<div class="mb-3">
+			  <label for="input-password-confirm" class="form-label"
+				>Підтвердіть пароль</label
+			  >
+			  <input
+				class="form-control"
+				type="password"
+				name="passwordConfirm"
+				id="input-password-confirm"
+				required
+			  />
+			  <p class="form-text"></p>
+			</div>
+			<p>Стать</p>
+			<div class="row mb-3">
+			  <div class="col-12">
+				<div class="form-check form-check-inline">
+				  <input
+					type="radio"
+					class="form-check-input"
+					name="gender"
+					value="male"
+					id="male"
+					checked
+				  />
+				  <label class="form-check-label" for="male">Чоловік</label>
+				</div>
+				<div class="form-check form-check-inline ms-3">
+				  <input
+					type="radio"
+					class="form-check-input"
+					name="gender"
+					value="female"
+					id="female"
+				  />
+				  <label class="form-check-label" for="female">Жінка</label>
+				</div>
+			  </div>
+			</div>
+			<div class="mb-3">
+			  <label class="form-label" for="birthday">
+				Дата народження
+			  </label>
+			  <input class="form-control" type="date" id="birthday" />
+			</div>
+			<button type="submit" class="btn btn-primary w-100 mb-3">
+			  Зареєструватись
+			</button>
+			<p class="text-center">
+			  Вже маєте аккаунт ? <a href="./login.html">Увійдіть тут</a>
+			</p>
+		  </form>
+		</div>
+	  </div>
+	</div>
+  </section>
