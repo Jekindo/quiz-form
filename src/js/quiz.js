@@ -17,6 +17,7 @@ const cancelDeleteBtn = new CancelDeleteBtn({
   selector: 'button[data-action="cancel-remove-question"]',
 });
 
+refs.quizForm.addEventListener('submit', onQuizFormSubmit);
 refs.quizForm.addEventListener('click', onQuizFormInteraction);
 refs.addQuestionBtn.addEventListener('click', onAddQuestionBtnClick);
 cancelDeleteBtn.buttonRef.addEventListener(
@@ -60,3 +61,33 @@ function onQuizFormInteraction(evt) {
     Answers.renderNewAnswer(evt);
   }
 }
+
+function onQuizFormSubmit(evt) {
+  evt.preventDefault();
+  evt.currentTarget.reset();
+
+  const DATA = [];
+}
+
+const DATA = [
+  {
+    question: 'Вопрос 1',
+    answers: [
+      {
+        id: 1,
+        value: 'Ответ 1',
+        correct: true,
+      },
+      {
+        id: 2,
+        value: 'Ответ 2',
+        correct: false,
+      },
+      {
+        id: 3,
+        value: 'Ответ 3',
+        correct: false,
+      },
+    ],
+  },
+];
