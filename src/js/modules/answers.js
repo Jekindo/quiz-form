@@ -42,7 +42,7 @@ export const renderAnswerTypeShortText = target => {
   const markup = `
 	<label class="form-label">
 	  Коротка відповідь
-	  <input class="form-control mt-2" id="answer" type="text" name="answer" />
+	  <input class="form-control mt-2" id="answer" type="text" name="answer" correct />
 	</label>
 	`;
 
@@ -61,6 +61,7 @@ export const renderAnswerTypeExpandedText = target => {
   	<textarea
 		class="form-control mt-2"
 		name="answer"
+		correct
 		rows="5"
 		placeholder="Введіть відповідь тут..."
    ></textarea>
@@ -298,13 +299,13 @@ export const removeAnswer = evt => {
 function setCorrectAnswer(btn, input) {
   btn.classList.add('is-active');
   input.classList.add('is-correct');
-  input.name = 'correctAnswer';
+  input.setAttribute('correct', '');
 }
 
 function resetCorrectAnswer(btn, input) {
   btn.classList.remove('is-active');
   input.classList.remove('is-correct');
-  input.name = 'answer';
+  input.removeAttribute('correct');
 }
 
 function updateCorrectAnswer() {}
