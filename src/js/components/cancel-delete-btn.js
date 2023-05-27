@@ -1,5 +1,5 @@
 import * as QuestionCard from '../modules/question-card';
-import Alert from './alert';
+import Alert from '../plugins/alert-plugin';
 
 const alert = new Alert({
   selector: '.js-alert',
@@ -17,10 +17,10 @@ export default class CancelDeleteBtn {
   }
 
   onClick() {
-	if(alert.isActive) {
-		console.log('Алерт активный')
-	}
-	
+    if (alert.isActive) {
+      console.log('Алерт активный');
+    }
+
     this._isPressed = true;
 
     alert.clearTimeout();

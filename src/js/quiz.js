@@ -3,7 +3,7 @@ import getRefs from './functions/get-refs';
 import getSvgSpriteUrl from './functions/get-svg-sprite-url';
 import * as QuestionCard from './modules/question-card';
 import * as Answers from './modules/answers';
-import Alert from './components/alert';
+import Alert from './plugins/alert-plugin';
 import CancelDeleteBtn from './components/cancel-delete-btn';
 import setActiveQuestionCard from './functions/set-active-question-card';
 import onAddQuestionBtnClick from './functions/on-add-question-btn-click';

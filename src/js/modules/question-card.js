@@ -1,4 +1,4 @@
-import Alert from '../components/alert';
+import Alert from '../plugins/alert-plugin';
 import getRefs from '../functions/get-refs';
 import getSvgSpriteUrl from '../functions/get-svg-sprite-url';
 import CancelDeleteBtn from '../components/cancel-delete-btn';
