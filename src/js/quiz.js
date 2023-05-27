@@ -17,11 +17,8 @@ const svgSpriteUrl = getSvgSpriteUrl();
 const alert = new Alert({
   selector: '.js-alert',
 });
-const validationErrorAlert = new Alert({
-  selector: '.js-validation-error-alert',
-});
-const validationSuccessAlert = new Alert({
-  selector: '.js-validation-success-alert',
+const validationAlert = new Alert({
+  selector: '.js-validation-alert',
 });
 const cancelDeleteBtn = new CancelDeleteBtn({
   selector: 'button[data-action="cancel-remove-question"]',
@@ -78,16 +75,12 @@ function onQuizFormSubmit(evt) {
   evt.preventDefault();
 
   const form = evt.currentTarget;
+  const answersContainers = document.querySelectorAll('#answers-container');
 
   /*
    * 1-й Вариант
    *  В лоб пройтись по каждому элементу формы, и если пусто -> выходить из функции
    */
-  const answersContainers = document.querySelectorAll('#answers-container');
-
-  [...answersContainers].every(container => {
-    return container.querySelectorAll('[name="answer"][correct]').length;
-  });
 
   for (const element of [...form.elements]) {
     if (
@@ -98,12 +91,15 @@ function onQuizFormSubmit(evt) {
       continue;
     }
 
-    console.log(refs);
-
     if (element.value === '') {
       element.classList.add('is-invalid');
       element.focus();
-      validationErrorAlert.show();
+
+      validationAlert.setup({
+        label: 'Є незаповнені поля !',
+        newClass: 'alert-danger',
+      });
+      validationAlert.show();
 
       element.addEventListener('input', onInvalidFieldInput);
 
@@ -111,16 +107,53 @@ function onQuizFormSubmit(evt) {
     }
 
     if (refs.questionsContainer.children.length < 1) {
-      console.log('Потрібно хоча б одне запитання');
+      validationAlert.setup({
+        label: 'Потрібно хоча б одне запитання',
+        newClass: 'alert-danger',
+      });
+      validationAlert.show();
       return;
-    }
-
-    if ('') {
     }
   }
 
+  const everyAnswersContainerHasCorrectAnswer = [...answersContainers].every(
+    container => {
+      const hasCorrectAnswer = Boolean(
+        container.querySelectorAll('[name="answer"][correct]').length
+      );
+
+      if (!hasCorrectAnswer) {
+        [
+          ...container.querySelectorAll('input[name="answer"]'),
+        ].forEach(input => {
+					input.focus()
+          input.classList.add('is-invalid');
+        });
+        console.log('Нету правильного ответа', container);
+      }
+
+      console.log(container, hasCorrectAnswer);
+      return hasCorrectAnswer;
+    }
+  );
+
+  if (!everyAnswersContainerHasCorrectAnswer) {
+    validationAlert.setup({
+      label: 'У кожному питанні повинна бути хоча б одна правильна відповідь',
+      newClass: 'alert-danger',
+    });
+    validationAlert.show();
+
+    return;
+  }
+
   // * Опитування було створено успішно
-  validationSuccessAlert.show();
+	// ! Убирать старые классы
+  validationAlert.setup({
+    label: 'Форма успішно створена !',
+    newClass: 'alert-success',
+  });
+  validationAlert.show();
 
   collectQuizFormData(form);
   resetQuestionsContainerMarkup();

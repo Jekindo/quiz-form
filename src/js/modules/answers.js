@@ -204,11 +204,15 @@ export const onSelectCorrectAnswerBtnCLick = evt => {
   const answerType = questionCard.querySelector('.js-form-select');
   const answersContainer = inputGroup.parentNode;
   const currectCorrectInput = answersContainer.querySelector(
-    'input.form-control.is-correct'
+    'input.form-control.is-valid'
   );
   const currentTargetedBtn = answersContainer.querySelector(
     'button.action-button.is-active'
   );
+
+  if (nextCorrectInput.classList.contains('is-invalid')) {
+    clearInvalid(questionCard);
+  }
 
   if (
     currectCorrectInput &&
@@ -218,7 +222,7 @@ export const onSelectCorrectAnswerBtnCLick = evt => {
     resetCorrectAnswer(currentTargetedBtn, currectCorrectInput);
   }
 
-  if (nextCorrectInput.classList.contains('is-correct')) {
+  if (nextCorrectInput.classList.contains('is-valid')) {
     resetCorrectAnswer(nextTargetedBtn, nextCorrectInput);
     return;
   }
@@ -299,12 +303,18 @@ export const removeAnswer = evt => {
 
 function setCorrectAnswer(btn, input) {
   btn.classList.add('is-active');
-  input.classList.add('is-correct');
+  input.classList.add('is-valid');
   input.setAttribute('correct', '');
 }
 
 function resetCorrectAnswer(btn, input) {
   btn.classList.remove('is-active');
-  input.classList.remove('is-correct');
+  input.classList.remove('is-valid');
   input.removeAttribute('correct');
+}
+
+function clearInvalid(questionCard) {
+  [...questionCard.querySelectorAll('input[name="answer"]')].forEach(input => {
+    input.classList.remove('is-invalid');
+  });
 }

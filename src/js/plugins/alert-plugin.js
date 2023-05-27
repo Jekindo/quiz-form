@@ -6,7 +6,6 @@ let timeoutId = null;
 export default class Alert {
   constructor({ selector }) {
     this.refs = this.#getRefs(selector);
-
     this.isActive = false;
   }
 
@@ -17,6 +16,11 @@ export default class Alert {
     refs.label = refs.alert.querySelector('.label');
 
     return refs;
+  }
+
+  setup({ label, newClass }) {
+    this.refs.alert.textContent = label;
+    this.refs.alert.classList.add(newClass);
   }
 
   show() {
