@@ -1,6 +1,6 @@
 import * as QuestionCard from '../modules/question-card';
 
-const NOTIFICATION_DELAY = 3000;
+const NOTIFICATION_DELAY = 5000;
 let timeoutId = null;
 
 export default class Alert {

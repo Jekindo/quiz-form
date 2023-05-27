@@ -15,7 +15,13 @@ let deletedQuestionCardMarkup = null;
 
 // * Логика добавления нового вопроса
 export const renderNew = qId => {
-  const markup = `
+  const markup = makeQuestionCardMarkup(qId);
+
+  refs.questionsContainer.insertAdjacentHTML('beforeend', markup);
+};
+
+export const makeQuestionCardMarkup = qId => {
+  return `
 	<div class="card js-question-card is-show rounded-top p-4 mb-3" id="${qId}">
 		  <div class="row">
 			<div class="col-md-6 mb-3">
@@ -101,7 +107,7 @@ export const renderNew = qId => {
 			class="action-button ms-auto"
 			type="button"
 			aria-label="delete question"
-			data-action="delete-question"
+				data-action="delete-question"
 			question-id="${qId}"
 		  >
 			<svg class="action-button__icon" question-id="${qId}" data-action="delete-question">
@@ -113,8 +119,6 @@ export const renderNew = qId => {
 		</div>
 		</div>
 	`;
-
-  refs.addQuestionBtn.insertAdjacentHTML('beforebegin', markup);
 };
 
 export const removeById = qId => {

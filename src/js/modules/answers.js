@@ -147,6 +147,7 @@ export const renderAnswerTypeCheckbox = target => {
 				class="form-control  ms-2"
 				name="answer"
 				value="Варіант 1"
+			
 			  />
   
 			  <button
@@ -307,5 +308,3 @@ function resetCorrectAnswer(btn, input) {
   input.classList.remove('is-correct');
   input.removeAttribute('correct');
 }
-
-function updateCorrectAnswer() {}
