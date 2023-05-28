@@ -12,6 +12,7 @@ export default function collectQuizFormData(form) {
 
   formData.push(headingData, ...questionsData);
 
+
   return formData;
 }
 
@@ -30,7 +31,7 @@ function collectQuestionsData(refs) {
     const questionElements = {
       question: question.querySelector('input[name="question"]'),
       answerType: question.querySelector('select[name="answerType"]'),
-      answers: question.querySelectorAll('input[name="answer"]'),
+      answers: question.querySelectorAll('[name="answer"]'),
     };
 
     const questionData = {

@@ -11,19 +11,22 @@ import getSelectCorrectAnswerButtonsComponents from './functions/get-select-corr
 import collectQuizFormData from './functions/collect-quiz-form-data';
 import resetQuestionsContainerMarkup from './functions/reset-questions-container-markup';
 import debounce from 'lodash.debounce';
+import validateQuizForm from './functions/validate-quiz-form';
 
 const refs = getRefs();
 const svgSpriteUrl = getSvgSpriteUrl();
 const alert = new Alert({
   selector: '.js-alert',
 });
-const validationAlert = new Alert({
-  selector: '.js-validation-alert',
+const validationErrorAlert = new Alert({
+  selector: '.js-validation-error-alert',
+});
+const validationSuccessAlert = new Alert({
+  selector: '.js-validation-success-alert',
 });
 const cancelDeleteBtn = new CancelDeleteBtn({
   selector: 'button[data-action="cancel-remove-question"]',
 });
-const formData = [];
 
 refs.quizForm.addEventListener('input', onQuizFormInput);
 refs.quizForm.addEventListener('submit', onQuizFormSubmit);
@@ -33,6 +36,7 @@ cancelDeleteBtn.buttonRef.addEventListener(
   'click',
   cancelDeleteBtn.onClick.bind(cancelDeleteBtn)
 );
+
 const listentedSelects = [];
 
 function onQuizFormInteraction(evt) {
@@ -41,7 +45,11 @@ function onQuizFormInteraction(evt) {
     QuestionCard.removeById(questionToRemoveId);
   }
 
-  if (evt.target.nodeName === 'INPUT' || evt.target.nodeName === 'SELECT') {
+  if (
+    evt.target.nodeName === 'INPUT' ||
+    evt.target.nodeName === 'SELECT' ||
+    evt.target.nodeName === 'TEXTAREA'
+  ) {
     setActiveQuestionCard(evt);
   }
 
@@ -75,100 +83,17 @@ function onQuizFormSubmit(evt) {
   evt.preventDefault();
 
   const form = evt.currentTarget;
-  const answersContainers = document.querySelectorAll('#answers-container');
 
-  /*
-   * 1-й Вариант
-   *  В лоб пройтись по каждому элементу формы, и если пусто -> выходить из функции
-   */
+  const isFormValid = validateQuizForm(form);
 
-  for (const element of [...form.elements]) {
-    if (
-      element.name === 'description' ||
-      element.name === 'answerStub' ||
-      element.nodeName === 'BUTTON'
-    ) {
-      continue;
-    }
-
-    if (element.value === '') {
-      element.classList.add('is-invalid');
-      element.focus();
-
-      validationAlert.setup({
-        label: 'Є незаповнені поля !',
-        newClass: 'alert-danger',
-      });
-      validationAlert.show();
-
-      element.addEventListener('input', onInvalidFieldInput);
-
-      return;
-    }
-
-    if (refs.questionsContainer.children.length < 1) {
-      validationAlert.setup({
-        label: 'Потрібно хоча б одне запитання',
-        newClass: 'alert-danger',
-      });
-      validationAlert.show();
-      return;
-    }
-  }
-
-  const everyAnswersContainerHasCorrectAnswer = [...answersContainers].every(
-    container => {
-      const hasCorrectAnswer = Boolean(
-        container.querySelectorAll('[name="answer"][correct]').length
-      );
-
-      if (!hasCorrectAnswer) {
-        [
-          ...container.querySelectorAll('input[name="answer"]'),
-        ].forEach(input => {
-					input.focus()
-          input.classList.add('is-invalid');
-        });
-        console.log('Нету правильного ответа', container);
-      }
-
-      console.log(container, hasCorrectAnswer);
-      return hasCorrectAnswer;
-    }
-  );
-
-  if (!everyAnswersContainerHasCorrectAnswer) {
-    validationAlert.setup({
-      label: 'У кожному питанні повинна бути хоча б одна правильна відповідь',
-      newClass: 'alert-danger',
-    });
-    validationAlert.show();
-
+  if (!isFormValid) {
     return;
   }
 
-  // * Опитування було створено успішно
-	// ! Убирать старые классы
-  validationAlert.setup({
-    label: 'Форма успішно створена !',
-    newClass: 'alert-success',
-  });
-  validationAlert.show();
-
-  collectQuizFormData(form);
+  console.log(collectQuizFormData(form));
   resetQuestionsContainerMarkup();
 
   form.reset();
-}
-
-function onInvalidFieldInput(evt) {
-  console.log('Удаляем класс');
-  evt.currentTarget.classList.remove('is-invalid');
-
-  setTimeout(() => {
-    evt.target.removeEventListener('input', onInvalidFieldInput);
-    console.log('Снимаем ивент листенер');
-  }, 0);
 }
 
 function onQuizFormInput(evt) {

@@ -18,11 +18,6 @@ export default class Alert {
     return refs;
   }
 
-  setup({ label, newClass }) {
-    this.refs.alert.textContent = label;
-    this.refs.alert.classList.add(newClass);
-  }
-
   show() {
     this.isActive = true;
 
@@ -40,6 +35,10 @@ export default class Alert {
 
   clearTimeout() {
     clearTimeout(timeoutId);
+  }
+
+  set label(newLabel) {
+	this.refs.label.textContent = newLabel
   }
 
   //   onMouseLeave(evt) {
