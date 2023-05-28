@@ -6,9 +6,13 @@ const refs = getRefs();
 const validationErrorAlert = new Alert({
   selector: '.js-validation-error-alert',
 });
+console.log('🚀 validationErrorAlert:', validationErrorAlert);
+
 const validationSuccessAlert = new Alert({
   selector: '.js-validation-success-alert',
 });
+console.log('🚀 validationSuccessAlert:', validationSuccessAlert);
+
 
 export default function validateQuizForm(form) {
   const questions = document.querySelectorAll('.js-question-card');
@@ -105,6 +109,6 @@ function checkElement(element) {
 }
 
 function showValidationErrorAlert(text) {
-  validationErrorAlert.label = text;
+  validationErrorAlert.setLabelText(text);
   validationErrorAlert.show();
 }

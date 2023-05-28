@@ -6,7 +6,8 @@ let timeoutId = null;
 export default class Alert {
   constructor({ selector }) {
     this.refs = this.#getRefs(selector);
-    this.isActive = false;
+
+    this.isOpen = false;
   }
 
   #getRefs(selector) {
@@ -19,8 +20,27 @@ export default class Alert {
   }
 
   show() {
-    this.isActive = true;
+    if (this.isOpen) {
+      this.refs.alert.style = 'display: none';
+      this.refs.alert.classList.remove('is-visible');
+      this.clearTimeout();
 
+      setTimeout(() => {
+        this.refs.alert.style = '';
+      }, 10);
+
+      setTimeout(() => {
+        this.refs.alert.classList.add('is-visible');
+      }, 250);
+
+      timeoutId = setTimeout(() => {
+        this.hide();
+      }, NOTIFICATION_DELAY);
+
+      return;
+    }
+
+    this.isOpen = true;
     this.refs.alert.classList.add('is-visible');
 
     timeoutId = setTimeout(() => {
@@ -29,16 +49,21 @@ export default class Alert {
   }
 
   hide(isCancelBtnPressed) {
+    this.isOpen = false;
+
     this.refs.alert.classList.remove('is-visible');
-    QuestionCard.updateId(isCancelBtnPressed);
+
+    if (!isCancelBtnPressed) {
+      QuestionCard.updateId();
+    }
   }
 
   clearTimeout() {
     clearTimeout(timeoutId);
   }
 
-  set label(newLabel) {
-	this.refs.label.textContent = newLabel
+  setLabelText(newText) {
+    this.refs.label.textContent = newText;
   }
 
   //   onMouseLeave(evt) {

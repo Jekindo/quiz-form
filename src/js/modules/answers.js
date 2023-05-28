@@ -233,9 +233,13 @@ export const onSelectCorrectAnswerBtnCLick = evt => {
 export const renderNewAnswer = evt => {
   const answerId = '';
   const input = evt.target;
+  const inputGroup = input.parentNode;
+  const previousInputGroup = inputGroup.previousElementSibling;
+  const previousInput = previousInputGroup.querySelector(
+    'input[name="answer"]'
+  );
   const answerTypeIconLabel =
     input.previousElementSibling.firstElementChild.href.animVal;
-  console.log('🚀 answerTypeIconLabel:', answerTypeIconLabel);
   const markup = `
   <button
 	class="action-button"
@@ -259,7 +263,15 @@ export const renderNewAnswer = evt => {
   </button>
   `;
 
-  input.classList.remove('disabled', 'text-secondary');
+  if (previousInput.classList.contains('is-invalid')) {
+    input.classList.add('is-invalid');
+  }
+
+  input.classList.remove(
+    'disabled',
+    'text-secondary',
+    'js-disabled-form-control'
+  );
   input.value = `Варіант ${answerId}`;
   input.name = 'answer';
   input.insertAdjacentHTML('afterend', markup);

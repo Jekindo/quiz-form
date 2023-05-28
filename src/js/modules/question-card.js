@@ -128,7 +128,9 @@ export const removeById = qId => {
   const deletedQuestionCardInnerMarkup = questionCard.innerHTML;
   const card = document.createElement('div');
 
-  card.classList.add('card', 'js-question-card', 'rounded-top', 'p-4', 'mb-3');
+  card.classList = [...questionCard.classList]
+    .filter(value => value !== 'is-show')
+    .join(' ');
   card.id = cancelDeleteBtn.buttonRef.getAttribute('deleted-question-id');
   card.insertAdjacentHTML('afterbegin', deletedQuestionCardInnerMarkup);
   deletedQuestionCardMarkup = card;
@@ -149,11 +151,7 @@ export const removeById = qId => {
   }, 250);
 };
 
-export const updateId = isCancelBtnPressed => {
-  if (isCancelBtnPressed) {
-    return;
-  }
-
+export const updateId = () => {
   const questionCards = document.querySelectorAll('.js-question-card');
 
   [...questionCards].map((question, index) => {
@@ -183,9 +181,7 @@ export const retrieve = () => {
   }, 250);
 
   if (currentQuestionIdToNumber === 1) {
-    document
-      .querySelector(`.card[id="heading"]`)
-      .after(deletedQuestionCardMarkup);
+    refs.questionsContainer.prepend(deletedQuestionCardMarkup);
   } else {
     previousQuestionId = `q${currentQuestionIdToNumber - 1}`;
     document
