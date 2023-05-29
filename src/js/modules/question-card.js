@@ -137,6 +137,40 @@ export const removeById = qId => {
 
   questionCard.classList.remove('is-show');
 
+//   ! На РЕФАКТОРИНГ (Тестирование прошло успешно)
+  
+  const questionRefs = {
+    question: questionCard.querySelector('input[name="question"]'),
+    answerType: questionCard.querySelector('select[name="answerType"]'),
+    answers: questionCard.querySelectorAll('[name="answer"]'),
+  };
+
+  const questionData = {
+    question: questionRefs.question.value,
+    answerTyppe: questionRefs.answerType.value,
+    answers: [],
+  };
+
+  [...questionRefs.answers].forEach((answer, index) => {
+    const answerData = {
+      id: index + 1,
+      value: answer.value,
+      correct: answer.hasAttribute('correct'),
+    };
+
+    questionData.answers.push(answerData);
+  });
+
+  deletedQuestionCardMarkup.querySelector('input[name="question"]').value =
+    questionData.question;
+  [...deletedQuestionCardMarkup.querySelectorAll('[name="answer"]')].map(
+    (answer, index) => {
+      console.log(answer);
+      console.log(questionData.answers[index]);
+      answer.value = questionData.answers[index].value;
+    }
+  );
+
   setTimeout(() => {
     questionCard.remove();
     alert.show();
@@ -174,7 +208,6 @@ export const retrieve = () => {
       .filter(element => !isNaN(element))
       .join('')
   );
-  let previousQuestionId = null;
 
   setTimeout(() => {
     deletedQuestionCardMarkup.classList.add('is-show');
@@ -183,7 +216,7 @@ export const retrieve = () => {
   if (currentQuestionIdToNumber === 1) {
     refs.questionsContainer.prepend(deletedQuestionCardMarkup);
   } else {
-    previousQuestionId = `q${currentQuestionIdToNumber - 1}`;
+    const previousQuestionId = `q${currentQuestionIdToNumber - 1}`;
     document
       .querySelector(`.js-question-card[id="${previousQuestionId}"]`)
       .after(deletedQuestionCardMarkup);

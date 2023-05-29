@@ -6,8 +6,6 @@ let timeoutId = null;
 export default class Alert {
   constructor({ selector }) {
     this.refs = this.#getRefs(selector);
-
-    this.isOpen = false;
   }
 
   #getRefs(selector) {
@@ -20,9 +18,11 @@ export default class Alert {
   }
 
   show() {
-    if (this.isOpen) {
-      this.refs.alert.style = 'display: none';
-      this.refs.alert.classList.remove('is-visible');
+    if (document.querySelector('.alert.is-visible')) {
+      const currentOpen = document.querySelector('.alert.is-visible');
+
+      currentOpen.style = 'display: none';
+      currentOpen.classList.remove('is-visible');
       this.clearTimeout();
 
       setTimeout(() => {
@@ -40,7 +40,6 @@ export default class Alert {
       return;
     }
 
-    this.isOpen = true;
     this.refs.alert.classList.add('is-visible');
 
     timeoutId = setTimeout(() => {
@@ -49,8 +48,6 @@ export default class Alert {
   }
 
   hide(isCancelBtnPressed) {
-    this.isOpen = false;
-
     this.refs.alert.classList.remove('is-visible');
 
     if (!isCancelBtnPressed) {

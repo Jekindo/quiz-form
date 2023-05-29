@@ -272,7 +272,7 @@ export const renderNewAnswer = evt => {
     'text-secondary',
     'js-disabled-form-control'
   );
-  input.value = `Варіант ${answerId}`;
+  input.value = ``;
   input.name = 'answer';
   input.insertAdjacentHTML('afterend', markup);
 

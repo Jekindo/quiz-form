@@ -10,8 +10,8 @@ import onAddQuestionBtnClick from './functions/on-add-question-btn-click';
 import getSelectCorrectAnswerButtonsComponents from './functions/get-select-correct-answer-btns-components';
 import collectQuizFormData from './functions/collect-quiz-form-data';
 import resetQuestionsContainerMarkup from './functions/reset-questions-container-markup';
-import debounce from 'lodash.debounce';
 import validateQuizForm from './functions/validate-quiz-form';
+import throttle from 'lodash.throttle';
 
 const refs = getRefs();
 const svgSpriteUrl = getSvgSpriteUrl();
@@ -28,7 +28,7 @@ const cancelDeleteBtn = new CancelDeleteBtn({
   selector: 'button[data-action="cancel-remove-question"]',
 });
 
-refs.quizForm.addEventListener('input', onQuizFormInput);
+refs.quizForm.addEventListener('input', throttle(onQuizFormInput, 500));
 refs.quizForm.addEventListener('submit', onQuizFormSubmit);
 refs.quizForm.addEventListener('click', onQuizFormInteraction);
 refs.addQuestionBtn.addEventListener('click', onAddQuestionBtnClick);
@@ -96,7 +96,9 @@ function onQuizFormSubmit(evt) {
   form.reset();
 }
 
+const formData = {};
+
 function onQuizFormInput(evt) {
-  //   formData[evt.target.name] = evt.target.value;
-  //   console.log(formData.get('name'));
+  formData[evt.target.name] = evt.target.value;
+  console.log(formData);
 }

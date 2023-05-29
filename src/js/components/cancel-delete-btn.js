@@ -17,10 +17,6 @@ export default class CancelDeleteBtn {
   }
 
   onClick() {
-    if (alert.isActive) {
-      console.log('Алерт активный');
-    }
-
     this._isPressed = true;
 
     alert.clearTimeout();
